@@ -12,15 +12,24 @@ import android.net.Uri;
 
 public class MainActivity extends AppCompatActivity {
 
+    VideoView Videoview;
+    Uri uri;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String fileName = "funny";
-        String filePlace = "android.resource://" + getPackageName() + "/raw/" + fileName;
-        VideoView videoView = (VideoView) findViewById(R.id.videoView);
-        videoView.setVideoURI(Uri.parse(filePlace));
-        videoView.start();
+         Videoview = (VideoView) findViewById(R.id.videoView);
+
+        uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.funny);
+        Videoview.setVideoURI(uri);
+
+        Button playButton = (Button) findViewById(R.id.play_button);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Videoview.start();
+            }
+        });
     }
 }
